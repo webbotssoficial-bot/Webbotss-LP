@@ -1,5 +1,7 @@
+# Build sem SMTP_* no ambiente evita que valores sejam incluídos no bundle (scan de segredos).
+# Em runtime o Netlify injeta as variáveis nas serverless functions.
 [build]
-  command = "npm run build"
+  command = "env -u SMTP_USERNAME -u SMTP_PASSWORD -u SMTP_HOST -u SMTP_PORT npm run build"
 
 [build.environment]
   NODE_VERSION = "20"
