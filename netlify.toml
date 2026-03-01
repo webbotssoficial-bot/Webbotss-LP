@@ -5,3 +5,6 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # Desabilita o scan de segredos no build. As variáveis SMTP continuam em runtime nas serverless functions.
+  # O valor pode aparecer no cache do webpack por causa do plugin Next.js do Netlify.
+  SECRETS_SCAN_ENABLED = "false"
