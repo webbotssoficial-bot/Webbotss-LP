@@ -1,3 +1,12 @@
-/.next
-/.cursor
 /node_modules
+*.zip
+/.next
+/out
+/.cargo
+.cargo/registry/src/index.crates.io-6f17d22bba15001f/ahash-0.8.11/.github/workflows/rust.yml
+.cargo/registry/src/index.crates.io-6f17d22bba15001f/ahash-0.8.11/.cargo_vcs_info.json
+/.agents
+/.antigravity
+.antigravity
+.agents
+.env
