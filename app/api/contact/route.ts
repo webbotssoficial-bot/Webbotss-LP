@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server"
 import nodemailer from "nodemailer"
-
-// Leitura em runtime para evitar que valores de env sejam incluídos no bundle (segurança)
-function getSmtpEnv(key: "SMTP_HOST" | "SMTP_PORT" | "SMTP_USERNAME" | "SMTP_PASSWORD"): string | undefined {
-  return process.env[key]
-}
+import { getSmtpConfig } from "@/lib/smtp-env.server"
 
 export async function POST(request: Request) {
   try {
@@ -22,17 +18,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "E-mail inválido" }, { status: 400 })
     }
 
-    const smtpUser = getSmtpEnv("SMTP_USERNAME")
-    if (!smtpUser || !getSmtpEnv("SMTP_HOST") || !getSmtpEnv("SMTP_PASSWORD")) {
+    const smtp = getSmtpConfig()
+    if (!smtp.user || !smtp.host || !smtp.pass) {
       return NextResponse.json({ error: "Configuração de e-mail indisponível" }, { status: 503 })
     }
     const transporter = nodemailer.createTransport({
-      host: getSmtpEnv("SMTP_HOST"),
-      port: Number(getSmtpEnv("SMTP_PORT") || 587),
+      host: smtp.host,
+      port: smtp.port,
       secure: false,
       auth: {
-        user: smtpUser,
-        pass: getSmtpEnv("SMTP_PASSWORD"),
+        user: smtp.user,
+        pass: smtp.pass,
       },
       tls: {
         rejectUnauthorized: false
@@ -161,8 +157,8 @@ export async function POST(request: Request) {
 
     // E-mail para a WebBotss
     await transporter.sendMail({
-      from: `WebBotss <${smtpUser}>`,
-      to: smtpUser,
+      from: `WebBotss <${smtp.user}>`,
+      to: smtp.user,
       subject,
       html,
     })
@@ -299,7 +295,7 @@ export async function POST(request: Request) {
       console.log("Assunto:", clientSubject)
       
       const result = await transporter.sendMail({
-        from: `WebBotss <${smtpUser}>`,
+        from: `WebBotss <${smtp.user}>`,
         to: email,
         subject: clientSubject,
         html: clientHtml,
