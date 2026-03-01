@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 168 98% 38%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 190 97% 28%;
+    --secondary-foreground: 0 0% 100%;
+    --tertiary: 65 67% 85%;
+    --tertiary-foreground: 0 0% 0%;
+    --muted: 168 98% 38% / 0.1;
+    --muted-foreground: 0 0% 40%;
+    --accent: 190 97% 28% / 0.1;
+    --accent-foreground: 190 97% 28%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 168 98% 38% / 0.2;
+    --input: 168 98% 38% / 0.2;
+    --ring: 168 98% 38%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 168 98% 38%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 190 97% 28%;
+    --secondary-foreground: 0 0% 100%;
+    --tertiary: 65 67% 85%;
+    --tertiary-foreground: 0 0% 0%;
+    --muted: 168 98% 38% / 0.1;
+    --muted-foreground: 0 0% 60%;
+    --accent: 190 97% 28% / 0.1;
+    --accent-foreground: 190 97% 28%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 168 98% 38% / 0.2;
+    --input: 168 98% 38% / 0.2;
+    --ring: 168 98% 38%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  .font-sofia-sans {
+    font-family: var(--font-sofia-sans), sans-serif;
+  }
+}
+
+/* Responsive: mobile and layout fixes (evita FOUC) */
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+  .flex-col-mobile {
+    flex-direction: column !important;
+  }
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+  h2 {
+    font-size: 1.75rem !important;
+    line-height: 1.2 !important;
+  }
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  [class*="card"] {
+    height: auto !important;
+  }
+}
+
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.testimonial-content {
+  flex: 1;
+}
+
+/* FAQ answer: tipografia shadcn (parágrafos, listas, links) */
+.faq-answer p {
+  line-height: 1.75;
+}
+.faq-answer p:not(:first-child) {
+  margin-top: 1rem;
+}
+.faq-answer ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+.faq-answer ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+.faq-answer li {
+  margin-top: 0.375rem;
+  line-height: 1.75;
+}
+.faq-answer li::marker {
+  color: hsl(var(--primary) / 0.8);
+}
+.faq-answer strong {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+.faq-answer a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.faq-answer a:hover {
+  color: hsl(var(--primary) / 0.9);
+}
+.faq-answer table {
+  width: 100%;
+  font-size: 0.875rem;
+  margin: 1rem 0;
+}
+.faq-answer th,
+.faq-answer td {
+  padding: 0.5rem 1rem;
+  text-align: left;
+  border: 1px solid hsl(var(--border));
+}
+.faq-answer tr:nth-child(even) {
+  background: hsl(var(--muted) / 0.5);
+}
+
