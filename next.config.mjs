@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 let userConfig = {}
 
@@ -56,6 +60,11 @@ const nextConfig = {
   //   parallelServerCompiles: true,
   // },
 
+  // Garantir resolução do alias @/ no build (ex.: Netlify)
+  webpack: (config) => {
+    config.resolve.alias['@'] = path.resolve(__dirname)
+    return config
+  },
 }
 
 mergeConfig(nextConfig, userConfig)
