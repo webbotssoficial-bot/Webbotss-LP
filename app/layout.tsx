@@ -14,6 +14,7 @@ const sofiaSans = Sofia_Sans({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://webbotss.com.br"),
   title: "WebBotss - Automatize seu Negócio",
   description: "Soluções de automação inteligente para impulsionar seu negócio",
   icons: {
