@@ -51,7 +51,31 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'webbotss.com.br',
+        port: '',
+        pathname: '/**',
+      },
     ],
+  },
+  // Headers de segurança para corrigir aviso de conteúdo misto (mixed content)
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: 'upgrade-insecure-requests',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload',
+          },
+        ],
+      },
+    ]
   },
   // Remover experimental para evitar problemas no VPS
   // experimental: {
